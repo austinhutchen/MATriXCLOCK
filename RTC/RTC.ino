@@ -12,18 +12,18 @@
 #include "ArduinoGraphics.h"
 #include "Arduino_LED_Matrix.h"  // Include the LED_Matrix library
 #include "RTC.h"
-int Minutes = 0;
-int Hours = 0;
+int Minutes = 15;
+int Hours = 5;
 int Scroll_Rate = 50;
     ArduinoLEDMatrix matrix;  // Create an instance of the ArduinoLEDMatrix class
 
 void setup() {
-  Serial.begin(115200);  // Initialize serial communication at a baud rate of 115200
+  Serial.begin(9600);  // Initialize serial communication at a baud rate of 115200
   RTC.begin();
 
   matrix.begin();  // Initialize the LED matrix
-  RTCTime startTime(3, Month::MARCH, 2024, 2, 32, 0, DayOfWeek::SUNDAY, SaveLight::SAVING_TIME_ACTIVE);
-
+  RTCTime startTime(3, Month::MAY, 2024, Hours, Minutes, 0, DayOfWeek::SUNDAY, SaveLight::SAVING_TIME_ACTIVE);
+  RTC.setTime(startTime);
 }
 
 // Define an array to hold pixel data for a single frame (4 pixels)
@@ -43,11 +43,11 @@ void loop() {
   matrix.textScrollSpeed(Scroll_Rate);
   matrix.textFont(Font_5x7);
   matrix.beginText(0, 1, 1);
-  matrix.println();
+  matrix.print("  ");
   matrix.print(Hours);
   matrix.print(":");
   matrix.print(Minutes);
-  matrix.print(" ");
+  matrix.print("  ");
   matrix.endText(SCROLL_LEFT);
   matrix.endDraw();
 }
