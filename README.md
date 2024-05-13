@@ -1,2 +1,2 @@
 hello
-<video src="./IMG_1412.MOV" />
+<video src="IMG_1412.MOV" />
