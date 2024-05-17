@@ -1,4 +1,5 @@
 ARDUINO REAL TIME CLOCK MATRIX
 <hr/>
 
-<video height="20svh" width="auto" preload="metadata"  src="/IMG_1412.MOV" />
+https://github.com/austinhutchen/MATriXCLOCK/assets/93489691/67159dd6-8df0-49b0-8710-2b7f51225ab2
+
