@@ -12,14 +12,16 @@
 #include "ArduinoGraphics.h"
 #include "Arduino_LED_Matrix.h"  // Include the LED_Matrix library
 #include "RTC.h"
-int Minutes = 15;
-int Hours = 5;
-int Scroll_Rate = 50;
+
+int Minutes = 9;
+int Hours = 6;
+int Scroll_Rate = 60;
     ArduinoLEDMatrix matrix;  // Create an instance of the ArduinoLEDMatrix class
 
 void setup() {
   Serial.begin(9600);  // Initialize serial communication at a baud rate of 115200
   RTC.begin();
+  Serial.println("Connecting to WiFi");
 
   matrix.begin();  // Initialize the LED matrix
   RTCTime startTime(3, Month::MAY, 2024, Hours, Minutes, 0, DayOfWeek::SUNDAY, SaveLight::SAVING_TIME_ACTIVE);
@@ -34,11 +36,24 @@ uint32_t frame[] = {
 void loop() {
   RTCTime currentTime;
   RTC.getTime(currentTime);
-   Minutes = int(currentTime.getMinutes());
+     Minutes = int(currentTime.getMinutes());
    Hours = int(currentTime.getHour());
-  if (Hours > 12) {
-    Hours -= 12;
+ if(Minutes < 10){
+    matrix.beginDraw();
+    matrix.textScrollSpeed(Scroll_Rate);
+    matrix.textFont(Font_5x7);
+    matrix.beginText(0, 1, 1);
+    matrix.print("  ");
+    matrix.print(Hours);
+    matrix.print(":0");
+    matrix.print(Minutes);
+    matrix.print("  ");
+    matrix.endText(SCROLL_LEFT);
+    matrix.endDraw();
+    return;
   }
+  
+ else{
   matrix.beginDraw();
   matrix.textScrollSpeed(Scroll_Rate);
   matrix.textFont(Font_5x7);
@@ -50,4 +65,9 @@ void loop() {
   matrix.print("  ");
   matrix.endText(SCROLL_LEFT);
   matrix.endDraw();
+ }
+  if (Hours > 12) {
+    Hours -= 12;
+  }
+
 }
