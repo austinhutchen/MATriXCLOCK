@@ -13,7 +13,7 @@
 #include "Arduino_LED_Matrix.h"  // Include the LED_Matrix library
 #include "RTC.h"
 
-int Minutes = 9;
+int Minutes = 12;
 int Hours = 6;
 int Scroll_Rate = 50;
     ArduinoLEDMatrix matrix;  // Create an instance of the ArduinoLEDMatrix class
@@ -41,7 +41,6 @@ void loop() {
 if (Hours > 12) {
     Hours -= 12;
   }
- if(Minutes < 10){
 
     matrix.beginDraw();
     matrix.textScrollSpeed(Scroll_Rate);
@@ -49,7 +48,7 @@ if (Hours > 12) {
     matrix.beginText(0, 1, 1);
     matrix.print("  ");
     matrix.print(Hours);
-    if(Minutes < 0x10){
+    if(Minutes < 10){
   matrix.print(":0");
     matrix.print(Minutes);
     }
@@ -61,7 +60,7 @@ if (Hours > 12) {
     matrix.endText(SCROLL_LEFT);
     matrix.endDraw();
     return;
-  }
+  
   
  
 
