@@ -15,7 +15,7 @@
 
 int Minutes = 9;
 int Hours = 6;
-int Scroll_Rate = 60;
+int Scroll_Rate = 50;
     ArduinoLEDMatrix matrix;  // Create an instance of the ArduinoLEDMatrix class
 
 void setup() {
@@ -38,36 +38,32 @@ void loop() {
   RTC.getTime(currentTime);
      Minutes = int(currentTime.getMinutes());
    Hours = int(currentTime.getHour());
+if (Hours > 12) {
+    Hours -= 12;
+  }
  if(Minutes < 10){
+
     matrix.beginDraw();
     matrix.textScrollSpeed(Scroll_Rate);
     matrix.textFont(Font_5x7);
     matrix.beginText(0, 1, 1);
     matrix.print("  ");
     matrix.print(Hours);
-    matrix.print(":0");
+    if(Minutes < 0x10){
+  matrix.print(":0");
     matrix.print(Minutes);
+    }
+  else{
+      matrix.print(":");
+  matrix.print(Minutes);
+  }
     matrix.print("  ");
     matrix.endText(SCROLL_LEFT);
     matrix.endDraw();
     return;
   }
   
- else{
-  matrix.beginDraw();
-  matrix.textScrollSpeed(Scroll_Rate);
-  matrix.textFont(Font_5x7);
-  matrix.beginText(0, 1, 1);
-  matrix.print("  ");
-  matrix.print(Hours);
-  matrix.print(":");
-  matrix.print(Minutes);
-  matrix.print("  ");
-  matrix.endText(SCROLL_LEFT);
-  matrix.endDraw();
- }
-  if (Hours > 12) {
-    Hours -= 12;
-  }
+ 
+
 
 }
