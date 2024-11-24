@@ -1,4 +1,4 @@
 
 <h1> <b> ARDUINO REAL TIME CLOCK MATRIX DEMONSTRATION</b></h1>
 <hr/>
-<img src="/IMG_1412.MOV"/>
+<img src="IMG_1412.MOV"/>
